@@ -8,23 +8,36 @@ h1 {
     margin: 0;
 }
 
+h2 {
+    font-family: 'Lato', sans-serif;
+}
+
+h4 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
 .mainContainer {
     display: flex;
     flex-direction: column;
 }
 
 .navBar {
-    width: 95%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 10px auto;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
 }
 
 .hamburgerBtn {
     width: 48px;
     height: 48px;
+    margin-left: 25px;
 }
 
 .logoArea {
@@ -39,6 +52,54 @@ h1 {
     align-items: center;
     width: 50px;
     height: 50px;
+    margin-right: 25px;
+}
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100vh;
+    margin-left: 20px;
+    border-right: 1px solid ;
+}
+
+.allTasks {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 7px;
+    background-color: rgba(47, 233, 124, 0.637);
+    width: 90%;
+}
+
+.today {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.favourites {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.addProject {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.hidden{
+    top:0;
+    left:0;
+    pointer-events: none !important;
+    position: absolute !important;
+    max-height:0 !important;
+    /* do nth but avoid opacity transition when position absolute */
+    transition: max-height 1s ease-out !important;    
+    opacity: 0 !important;
 }
 
 label {
