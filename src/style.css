@@ -55,6 +55,12 @@ h4 {
     margin-right: 25px;
 }
 
+.splitContent {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
 .sideBar {
     display: flex;
     flex-direction: column;
@@ -100,6 +106,24 @@ h4 {
     /* do nth but avoid opacity transition when position absolute */
     transition: max-height 1s ease-out !important;    
     opacity: 0 !important;
+}
+
+.listOfTasks {
+    margin: 30px;
+    width: 100%;
+    height: 20%;
+}
+
+.listOfTasks > h1 {
+    background-color: aquamarine;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.listOfTasks > p {
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    text-align: center;
 }
 
 label {

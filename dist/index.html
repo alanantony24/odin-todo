@@ -13,42 +13,46 @@
   </head>
   <body>
     <div id="mainContainer">
-
       <header class="navBar">
         <div class="hamburgerBtn">
           <img src="/src/images/hamburger.png" alt="Hamburger Toggle Button" />
         </div>
         <div class="logoArea">
-            <h1>To-Do App</h1>
-            <img src="/src/images/todologo.png" alt="To Do Logo" />
+          <h1>To-Do App</h1>
+          <img src="/src/images/todologo.png" alt="To Do Logo" />
         </div>
         <div class="toggleNightMode">
-            <input type="checkbox" id="darkmode-toggle" />
-            <label for="darkmode-toggle"></label>
+          <input type="checkbox" id="darkmode-toggle" />
+          <label for="darkmode-toggle"></label>
         </div>
       </header>
 
-      <div class="sideBar">
-        <h2>Main</h2>
-        <div class="allTasks">
-          <img src="/src/images/alltasks.png" alt="All Tasks">
-          <h4>All Tasks</h4>
-        </div>
-        <div class="today">
-          <img src="/src/images/today.png" alt="Tasks for Today">
-          <h4>Tasks for Today</h4>
-        </div>
-        <div class="favourites">
-          <img src="/src/images/favourites.png" alt="Favourites">
-          <h4>Favourites</h4>
-        </div>
+      <div class="splitContent">
+        <div class="sideBar">
+          <h2>Main</h2>
+          <div class="allTasks">
+            <img src="/src/images/alltasks.png" alt="All Tasks" />
+            <h4>All Tasks</h4>
+          </div>
+          <div class="today">
+            <img src="/src/images/today.png" alt="Tasks for Today" />
+            <h4>Tasks for Today</h4>
+          </div>
+          <div class="favourites">
+            <img src="/src/images/favourites.png" alt="Favourites" />
+            <h4>Favourites</h4>
+          </div>
 
-        <h2>Projects</h2>
-        <div class="addProject">
-          <img src="/src/images/add.png" alt="Add a new project">
-          <h4>Add a new project</h4>
+          <h2>Projects</h2>
+          <div class="addProject">
+            <img src="/src/images/add.png" alt="Add a new project" />
+            <h4>Add a new project</h4>
+          </div>
         </div>
-
+        <div class="listOfTasks">
+          <h1>All tasks</h1>
+          <p>Yay! No Tasks!</p>
+        </div>
       </div>
     </div>
     <script src="main.js"></script>
