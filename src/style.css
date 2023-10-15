@@ -1,11 +1,10 @@
 :root {
-    --bgColor1: #15202b;
-    --bgColor2: #192734;
-    --bgColor3: #22303c;
-    --bgColorPopUp: #273746;
-    --textColor: #eaebec;
-    --accent: #2abd67;
-    --accentDark:#1f8d4d;
+    --bgColor2:#ececec;
+    --bgColor3: #f2f3f5;
+    --bgColor1:#fefcfe;
+    --bgColorPopUp: #f3f1f3;
+    --textColor: #374958;
+    --accentDark: #2abd67;
 }
 
 body {
@@ -31,13 +30,14 @@ h4 {
     color: var(--textColor);
 }
 
-body.light{
-    --bgColor2:#ececec;
-    --bgColor3: #f2f3f5;
-    --bgColor1:#fefcfe;
-    --bgColorPopUp: #f3f1f3;
-    --textColor: #374958;
-    --accentDark: #2abd67;
+body.dark{
+    --bgColor1: #15202b;
+    --bgColor2: #192734;
+    --bgColor3: #22303c;
+    --bgColorPopUp: #273746;
+    --textColor: #eaebec;
+    --accent: #2abd67;
+    --accentDark:#1f8d4d;
 }
 
 .mainContainer {
