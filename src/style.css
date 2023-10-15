@@ -94,38 +94,28 @@ body.dark{
     display: flex;
     flex-direction: column;
     width: 25%;
-    height: 100vh;
     padding-left: 20px;
     border-right: 1px solid ;
     background-color: var(--bgColor1);
 }
 
-.allTasks {
+.mainTaskLists {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     border-radius: 7px;
-    background-color: rgba(47, 233, 124, 0.637);
     width: 90%;
+    margin-bottom: 20px;
 }
 
-.today {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.favourites {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+.selected {
+    background-color: rgba(47, 233, 124, 0.637);
 }
 
 .addProject {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
 }
 
 .hidden{

@@ -1,5 +1,5 @@
 import './style.css';
-
+import clickOnMainTaskLists from './modules/domManipulation';
 //to toggle the sidebar.
 const hamburgerBtn = document.querySelector(".hamburgerBtn");
 hamburgerBtn.addEventListener('click', () => {
@@ -21,3 +21,5 @@ else {
 toggleLightMode.addEventListener("change", () => {
     document.body.classList.toggle("dark");
 });
+
+clickOnMainTaskLists();
