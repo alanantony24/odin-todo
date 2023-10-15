@@ -1,5 +1,5 @@
 import './style.css';
-import clickOnMainTaskLists from './modules/domManipulation';
+import {clickOnMainTaskLists, createProjectFormDisplay} from './modules/domManipulation';
 //to toggle the sidebar.
 const hamburgerBtn = document.querySelector(".hamburgerBtn");
 hamburgerBtn.addEventListener('click', () => {
@@ -23,3 +23,4 @@ toggleLightMode.addEventListener("change", () => {
 });
 
 clickOnMainTaskLists();
+createProjectFormDisplay();
