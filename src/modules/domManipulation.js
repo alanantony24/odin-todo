@@ -1,4 +1,5 @@
 import Project from "./projects";
+import { getProjectListFromLocalStorage, addProjectToLocalStorage } from "./localStorage";
 //selects the taskLists from the sideBar, highlights them and changes the name of the heading in the right pane
 function clickOnMainTaskLists() {
   const mainTaskLists = document.querySelectorAll(".mainTaskLists");
@@ -35,9 +36,25 @@ function addNewProject() {
     const addProjectBtn = document.getElementById("addProjectBtn");
     addProjectBtn.addEventListener("click", () => {
       const newProject = new Project(projectName.value);
-      
+      addProjectToLocalStorage(newProject);
     });
   }
 }
 
-export { clickOnMainTaskLists, createProjectFormDisplay, addNewProject };
+function displayAllProjects() {
+  const projectsListFromLocalStorage = getProjectListFromLocalStorage();
+  projectsListFromLocalStorage.forEach((project) => {
+    const projectsList = document.querySelector(".projectsList") 
+    const projectObject = document.createElement("div")
+    projectObject.classList.add("projectObject");
+    const projectName = document.createElement("h4");
+    projectName.textContent = project.name;
+    const kebabIcon = document.createElement("img");
+    kebabIcon.src = "../src/images/kebab.png";
+    projectObject.appendChild(projectName);
+    projectObject.appendChild(kebabIcon);
+    projectsList.appendChild(projectObject);
+  })
+}
+
+export { clickOnMainTaskLists, createProjectFormDisplay, addNewProject, displayAllProjects };
