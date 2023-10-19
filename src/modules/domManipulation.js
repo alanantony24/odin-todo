@@ -1,3 +1,4 @@
+import Project from "./projects";
 //selects the taskLists from the sideBar, highlights them and changes the name of the heading in the right pane
 function clickOnMainTaskLists() {
   const mainTaskLists = document.querySelectorAll(".mainTaskLists");
@@ -27,4 +28,16 @@ function createProjectFormDisplay() {
   });
 }
 
-export { clickOnMainTaskLists, createProjectFormDisplay };
+function addNewProject() {
+  const projectForm = document.querySelector(".projectForm");
+  if (projectForm) {
+    const projectName = document.getElementById("projectName");
+    const addProjectBtn = document.getElementById("addProjectBtn");
+    addProjectBtn.addEventListener("click", () => {
+      const newProject = new Project(projectName.value);
+      
+    });
+  }
+}
+
+export { clickOnMainTaskLists, createProjectFormDisplay, addNewProject };

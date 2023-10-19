@@ -1,4 +1,4 @@
-class Project {
+export default class Project {
     constructor(name) {
         this.name = name;
         this.listOfTasks = [];
@@ -8,7 +8,15 @@ class Project {
         this.name = name;
     }
 
+    getName() {
+        return this.name;
+    }
+
     getTasks() {
         return this.listOfTasks;
+    }
+    
+    setTasks() {
+        this.listOfTasks = this.listOfTasks;
     }
 }
