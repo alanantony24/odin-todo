@@ -144,7 +144,7 @@ body.dark{
     background-color: var(--bgColor1);
 }
 
-.mainTaskLists {
+.mainTaskListObject {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -160,7 +160,7 @@ body.dark{
 .projectsList {
     display: flex;
     flex-direction: column;
-    padding: 0px 10px;
+    margin-right: 10px;
 }
 
 .projectObject {
@@ -168,6 +168,14 @@ body.dark{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border-radius: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.projectObject > h4 {
+    font-style: normal;
+    font-weight: bold;
 }
 
 .addProject {

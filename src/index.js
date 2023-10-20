@@ -1,5 +1,5 @@
 import './style.css';
-import {clickOnMainTaskLists, createProjectFormDisplay, addNewProject, displayAllProjects} from './modules/domManipulation';
+import {clickOnElementList, displayCreateProjectForm, addNewProject, displayAllProjects} from './modules/domManipulation';
 //to toggle the sidebar.
 const hamburgerBtn = document.querySelector(".hamburgerBtn");
 hamburgerBtn.addEventListener('click', () => {
@@ -22,7 +22,14 @@ toggleLightMode.addEventListener("change", () => {
     document.body.classList.toggle("dark");
 });
 
+//displays all the projects on first loading of website
 displayAllProjects();
-clickOnMainTaskLists();
-createProjectFormDisplay();
+
+//toggles the green color and text change when clicked on the mainTasksList and the projectsList
+clickOnElementList(".mainTaskListObject");
+clickOnElementList(".projectObject")
+
+//displays the createProject form
+displayCreateProjectForm();
+//adds a new project
 addNewProject();

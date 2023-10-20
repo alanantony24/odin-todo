@@ -1,24 +1,29 @@
 import Project from "./projects";
 import { getProjectListFromLocalStorage, addProjectToLocalStorage } from "./localStorage";
 //selects the taskLists from the sideBar, highlights them and changes the name of the heading in the right pane
-function clickOnMainTaskLists() {
-  const mainTaskLists = document.querySelectorAll(".mainTaskLists");
-  const taskListHeading = document.querySelector(".taskListHeading");
-  mainTaskLists.forEach((mainTaskList) => {
-    mainTaskList.addEventListener("click", () => {
+function clickOnElementList(elementList) {
+  const list = document.querySelectorAll(elementList);
+  const elementHeading = document.querySelector(".elementHeading");
+  list.forEach((element) => {
+    element.addEventListener("click", () => {
       var prevSelection = document.querySelector(".selected");
       if (prevSelection) {
         prevSelection.classList.remove("selected");
       }
-      taskListHeading.textContent = mainTaskList.children[1].textContent;
-      mainTaskList.classList.toggle("selected");
+      if (elementList === ".mainTaskListObject") {
+        elementHeading.textContent = element.children[1].textContent;
+      }
+      else {
+        elementHeading.textContent = element.children[0].textContent;
+      }
+      element.classList.toggle("selected");
     });
   });
 }
 
-//to toggle the sidebar.
-function createProjectFormDisplay() {
-  const addProject = document.querySelector(".addProject");
+//to display the create project form
+function displayCreateProjectForm() {
+  const addProject = document.querySelector(".addProject"); //add project icon + text on the sidebar
   addProject.addEventListener("click", () => {
     const projectForm = document.querySelector(".projectForm");
     projectForm.classList.remove("hidden");
@@ -29,6 +34,7 @@ function createProjectFormDisplay() {
   });
 }
 
+//get data from the project form and save it to localStorage
 function addNewProject() {
   const projectForm = document.querySelector(".projectForm");
   if (projectForm) {
@@ -37,10 +43,13 @@ function addNewProject() {
     addProjectBtn.addEventListener("click", () => {
       const newProject = new Project(projectName.value);
       addProjectToLocalStorage(newProject);
+      projectForm.classList.add("hidden");
     });
   }
 }
 
+
+//get the data from localStorage, and generate the html for the inidividual project objects
 function displayAllProjects() {
   const projectsListFromLocalStorage = getProjectListFromLocalStorage();
   projectsListFromLocalStorage.forEach((project) => {
@@ -54,7 +63,7 @@ function displayAllProjects() {
     projectObject.appendChild(projectName);
     projectObject.appendChild(kebabIcon);
     projectsList.appendChild(projectObject);
-  })
+  });
 }
 
-export { clickOnMainTaskLists, createProjectFormDisplay, addNewProject, displayAllProjects };
+export { clickOnElementList, displayCreateProjectForm, addNewProject, displayAllProjects };
