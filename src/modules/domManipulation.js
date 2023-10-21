@@ -15,6 +15,9 @@ function clickOnElementList(elementList) {
       }
       else {
         elementHeading.textContent = element.children[0].textContent;
+        if (document.querySelector(".noTasksText")) {
+          document.querySelector(".noTasksText").remove();
+        }
       }
       element.classList.toggle("selected");
     });
@@ -64,6 +67,8 @@ function displayAllProjects() {
     projectObject.appendChild(kebabIcon);
     projectsList.appendChild(projectObject);
   });
-}
+};
+
+
 
 export { clickOnElementList, displayCreateProjectForm, addNewProject, displayAllProjects };
