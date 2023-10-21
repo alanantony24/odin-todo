@@ -65,6 +65,18 @@
         <div class="listOfTasks">
           <h1 class="elementHeading">All tasks</h1>
           <p class="noTasksText">Yay! No Tasks!</p>
+          <div class="taskForm hidden">
+            <label for="taskName"></label>
+            <input placeholder="What's the task" type="text" id="taskName" />
+            <label for="description"></label>
+            <input placeholder="eg. Remember to bring towels to the gym!" type="text" id="description" />
+            <label for="date"></label>
+            <input placeholder="dd/mm/yyyy" type="date" id="date" />
+            <div class="taskButtons">
+              <button id="addTaskBtn" class="addTaskBtn" type="submit">Add</button>
+              <button class="cancelBtn" type="button">Cancel</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

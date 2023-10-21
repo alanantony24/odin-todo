@@ -17,6 +17,7 @@ function clickOnElementList(elementList) {
         elementHeading.textContent = element.children[0].textContent;
         if (document.querySelector(".noTasksText")) {
           document.querySelector(".noTasksText").remove();
+          unhideCreateTaskForm();
         }
       }
       element.classList.toggle("selected");
@@ -68,6 +69,18 @@ function displayAllProjects() {
     projectsList.appendChild(projectObject);
   });
 };
+
+//create a button to unhide the create task form
+function unhideCreateTaskForm() {
+  const createTaskFormBtn = document.createElement("button");
+  createTaskFormBtn.textContent = "Create Task"
+  document.querySelector(".listOfTasks").appendChild(createTaskFormBtn)
+  createTaskFormBtn.classList.add("createTaskFormBtn");
+  createTaskFormBtn.addEventListener("click", () => {
+    const createTaskForm = document.querySelector(".taskForm");
+    createTaskForm.classList.remove("hidden");
+  })
+}
 
 
 
