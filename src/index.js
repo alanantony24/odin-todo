@@ -1,5 +1,5 @@
 import './style.css';
-import {clickOnElementList, displayCreateProjectForm, addNewProject, displayAllProjects} from './modules/domManipulation';
+import {clickOnElementList, displayCreateProjectForm, addNewProject, displayAllProjects, createTask} from './modules/domManipulation';
 //to toggle the sidebar.
 const hamburgerBtn = document.querySelector(".hamburgerBtn");
 hamburgerBtn.addEventListener('click', () => {
@@ -33,3 +33,5 @@ clickOnElementList(".projectObject")
 displayCreateProjectForm();
 //adds a new project
 addNewProject();
+//creates a new task and adds it to the taskList of the project
+createTask()

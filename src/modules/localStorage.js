@@ -1,3 +1,6 @@
+import Task from '../modules/tasks'
+import Project from './projects';
+
 function getProjectListFromLocalStorage() {
     var projectsList = JSON.parse(localStorage.getItem("projectsList"));
     if (projectsList == null) {
@@ -17,4 +20,30 @@ function addProjectToLocalStorage(project) {
     localStorage.setItem("projectsList", JSON.stringify(projectsList));
 }
 
-export {getProjectListFromLocalStorage, addProjectToLocalStorage}
+function createNewTask(projectName, task) {
+    var tasksList;
+    tasksList = JSON.parse(localStorage.getItem("projectsList"));
+    const newTask = new Task(task.title, task.description, task.dueDate, task.priority); //create a new task object
+    const project = getProjectByName(projectName); //find which project to add the task to
+    //add task to list of tasks in project, and push the taskList to the respective project and save to localStorage.
+    tasksList[project.index].listOfTasks.push(newTask);
+    //tasksList.push(project);
+    localStorage.setItem("projectsList", JSON.stringify(tasksList));
+}
+
+function getProjectByName(projectName) {
+    var projectList = getProjectListFromLocalStorage();
+    let projectFound = null;
+    var index = null;
+    projectList.forEach((project) => {
+        //console.log(projectName);
+        //console.log(project);
+        if (projectName === project.name) {
+            projectFound = project;
+            index = projectList.indexOf(project);
+        }
+    });
+    return {projectFound, index};
+}
+
+export {getProjectListFromLocalStorage, addProjectToLocalStorage, createNewTask, getProjectByName}

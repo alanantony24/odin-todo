@@ -1,5 +1,6 @@
 import Project from "./projects";
-import { getProjectListFromLocalStorage, addProjectToLocalStorage } from "./localStorage";
+import Task from "./tasks";
+import { getProjectListFromLocalStorage, addProjectToLocalStorage, getProjectByName, createNewTask } from "./localStorage";
 //selects the taskLists from the sideBar, highlights them and changes the name of the heading in the right pane
 function clickOnElementList(elementList) {
   const list = document.querySelectorAll(elementList);
@@ -82,6 +83,19 @@ function unhideCreateTaskForm() {
   })
 }
 
+//create a task and store it to a project
+function createTask() {
+  const createTaskBtn = document.querySelector(".addTaskBtn");
+  var title = document.getElementById("taskName");
+  var description = document.getElementById("description");
+  var date = document.getElementById("date");
+  createTaskBtn.addEventListener("click", () => {
+    const projectName = document.querySelector(".elementHeading").textContent;
+    const newTask = new Task(title.value, description.value, date.value)
+    createNewTask(projectName, newTask);
+  })
+}
 
 
-export { clickOnElementList, displayCreateProjectForm, addNewProject, displayAllProjects };
+
+export { clickOnElementList, displayCreateProjectForm, addNewProject, displayAllProjects, createTask };
