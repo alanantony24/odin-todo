@@ -1,6 +1,11 @@
 import Project from "./projects";
 import Task from "./tasks";
-import { getProjectListFromLocalStorage, addProjectToLocalStorage, getProjectByName, createNewTask } from "./localStorage";
+import {
+  getProjectListFromLocalStorage,
+  addProjectToLocalStorage,
+  getTasksByProject,
+  createNewTask,
+} from "./localStorage";
 //selects the taskLists from the sideBar, highlights them and changes the name of the heading in the right pane
 function clickOnElementList(elementList) {
   const list = document.querySelectorAll(elementList);
@@ -13,12 +18,12 @@ function clickOnElementList(elementList) {
       }
       if (elementList === ".mainTaskListObject") {
         elementHeading.textContent = element.children[1].textContent;
-      }
-      else {
+      } else {
         elementHeading.textContent = element.children[0].textContent;
         if (document.querySelector(".noTasksText")) {
           document.querySelector(".noTasksText").remove();
           unhideCreateTaskForm();
+          displayTasksByProject();
         }
       }
       element.classList.toggle("selected");
@@ -53,13 +58,12 @@ function addNewProject() {
   }
 }
 
-
 //get the data from localStorage, and generate the html for the inidividual project objects
 function displayAllProjects() {
   const projectsListFromLocalStorage = getProjectListFromLocalStorage();
   projectsListFromLocalStorage.forEach((project) => {
-    const projectsList = document.querySelector(".projectsList") 
-    const projectObject = document.createElement("div")
+    const projectsList = document.querySelector(".projectsList");
+    const projectObject = document.createElement("div");
     projectObject.classList.add("projectObject");
     const projectName = document.createElement("h4");
     projectName.textContent = project.name;
@@ -69,18 +73,18 @@ function displayAllProjects() {
     projectObject.appendChild(kebabIcon);
     projectsList.appendChild(projectObject);
   });
-};
+}
 
 //create a button to unhide the create task form
 function unhideCreateTaskForm() {
   const createTaskFormBtn = document.createElement("button");
-  createTaskFormBtn.textContent = "Create Task"
-  document.querySelector(".listOfTasks").appendChild(createTaskFormBtn)
+  createTaskFormBtn.textContent = "Create Task";
+  document.querySelector(".listOfTasks").appendChild(createTaskFormBtn);
   createTaskFormBtn.classList.add("createTaskFormBtn");
   createTaskFormBtn.addEventListener("click", () => {
     const createTaskForm = document.querySelector(".taskForm");
     createTaskForm.classList.remove("hidden");
-  })
+  });
 }
 
 //create a task and store it to a project
@@ -91,11 +95,32 @@ function createTask() {
   var date = document.getElementById("date");
   createTaskBtn.addEventListener("click", () => {
     const projectName = document.querySelector(".elementHeading").textContent;
-    const newTask = new Task(title.value, description.value, date.value)
+    const newTask = new Task(title.value, description.value, date.value);
     createNewTask(projectName, newTask);
-  })
+  });
 }
 
+function displayTasksByProject() {
+  const projectName = document.querySelector(".elementHeading").textContent;
+  const tasksList = getTasksByProject(projectName);
+  const tasksDiv = document.querySelector(".tasksList");
+  const taskElement = document.createElement("div");
+  const taskName = document.createElement("h3");
+  const dueDate = document.createElement("h3");
+  tasksList.forEach((task) => {
+    taskName.textContent = task.title;
+    dueDate.textContent = task.dueDate;
+    taskElement.append(taskName);
+    taskElement.append(dueDate);
+    tasksDiv.appendChild(taskElement);
+  });
+}
 
-
-export { clickOnElementList, displayCreateProjectForm, addNewProject, displayAllProjects, createTask };
+export {
+  clickOnElementList,
+  displayCreateProjectForm,
+  displayTasksByProject,
+  addNewProject,
+  displayAllProjects,
+  createTask,
+};
