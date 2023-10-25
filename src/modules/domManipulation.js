@@ -22,8 +22,8 @@ function clickOnElementList(elementList) {
         elementHeading.textContent = element.children[0].textContent;
         if (document.querySelector(".noTasksText")) {
           document.querySelector(".noTasksText").remove();
-          unhideCreateTaskForm();
           displayTasksByProject();
+          unhideCreateTaskForm();
         }
       }
       element.classList.toggle("selected");
@@ -104,14 +104,28 @@ function displayTasksByProject() {
   const projectName = document.querySelector(".elementHeading").textContent;
   const tasksList = getTasksByProject(projectName);
   const tasksDiv = document.querySelector(".tasksList");
-  const taskElement = document.createElement("div");
-  const taskName = document.createElement("h3");
-  const dueDate = document.createElement("h3");
   tasksList.forEach((task) => {
+    const taskElement = document.createElement("div");
+    taskElement.classList.add("taskElement");
+    const leftDiv = document.createElement("div");
+    leftDiv.classList.add("taskElementLeftDiv");
+    const rightDiv = document.createElement("div");
+    rightDiv.classList.add("taskElementRightDiv");
+    const taskName = document.createElement("h3");
+    const dueDate = document.createElement("h3");
+    const kebabIcon = document.createElement("img");
+    const starIcon = document.createElement("img");
+    kebabIcon.classList.add("deleteEditTask");
+    kebabIcon.src = "../src/images/kebab.png"
+    starIcon.src = "../src/images/star.png"
     taskName.textContent = task.title;
     dueDate.textContent = task.dueDate;
-    taskElement.append(taskName);
-    taskElement.append(dueDate);
+    leftDiv.append(starIcon)
+    leftDiv.append(taskName);
+    rightDiv.append(dueDate);
+    rightDiv.append(kebabIcon);
+    taskElement.append(leftDiv);
+    taskElement.append(rightDiv);
     tasksDiv.appendChild(taskElement);
   });
 }

@@ -57,7 +57,6 @@ function getTasksByProject(projectName) {
   if (projectsList != null) {
     projectsList.forEach((project) => {
       if (projectName == project.name) {
-        console.log(projectName);
         listOfTasks =  project.listOfTasks;
       }
     });
