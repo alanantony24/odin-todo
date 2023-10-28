@@ -55,6 +55,7 @@ function addNewProject() {
     addProjectBtn.addEventListener("click", () => {
       const newProject = new Project(projectName.value);
       addProjectToLocalStorage(newProject);
+      displayAllProjects();
       projectForm.classList.add("hidden");
     });
   }
@@ -63,8 +64,9 @@ function addNewProject() {
 //get the data from localStorage, and generate the html for the inidividual project objects
 function displayAllProjects() {
   const projectsListFromLocalStorage = getProjectListFromLocalStorage();
+  const projectsList = document.querySelector(".projectsList");
+  projectsList.replaceChildren();
   projectsListFromLocalStorage.forEach((project) => {
-    const projectsList = document.querySelector(".projectsList");
     const projectObject = document.createElement("div");
     projectObject.classList.add("projectObject");
     const projectName = document.createElement("h4");
@@ -100,6 +102,7 @@ function createTask() {
     const projectName = document.querySelector(".elementHeading").textContent;
     const newTask = new Task(title.value, description.value, date.value);
     createNewTask(projectName, newTask);
+    displayTasksByProject();
     createTaskForm.classList.add("hidden");
   });
 }
@@ -108,6 +111,7 @@ function displayTasksByProject() {
   const projectName = document.querySelector(".elementHeading").textContent;
   const tasksList = getTasksByProject(projectName);
   const tasksDiv = document.querySelector(".tasksList");
+  tasksDiv.replaceChildren();
   tasksList.forEach((task) => {
     const taskElement = document.createElement("div");
     taskElement.classList.add("taskElement");
