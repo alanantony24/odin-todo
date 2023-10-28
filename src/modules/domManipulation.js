@@ -5,6 +5,7 @@ import {
   addProjectToLocalStorage,
   getTasksByProject,
   createNewTask,
+  deleteTask
 } from "./localStorage";
 //selects the taskLists from the sideBar, highlights them and changes the name of the heading in the right pane
 function clickOnElementList(elementList) {
@@ -23,6 +24,7 @@ function clickOnElementList(elementList) {
         if (document.querySelector(".noTasksText")) {
           document.querySelector(".noTasksText").remove();
           displayTasksByProject();
+          deleteTaskElement();
           unhideCreateTaskForm();
         }
       }
@@ -130,6 +132,20 @@ function displayTasksByProject() {
   });
 }
 
+function deleteTaskElement() {
+  const taskElements = document.querySelectorAll(".deleteEditTask");
+  console.log(taskElements)
+  const projectName = document.querySelector(".elementHeading").textContent;
+  taskElements.forEach((taskElement) => {
+    taskElement.addEventListener("click", () => {
+      var taskName = taskElement.parentNode.previousSibling.lastChild.textContent;
+      console.log(taskName)
+      deleteTask(projectName, taskName);
+      console.log("deleted")
+    })
+  })
+}
+
 export {
   clickOnElementList,
   displayCreateProjectForm,
@@ -137,4 +153,5 @@ export {
   addNewProject,
   displayAllProjects,
   createTask,
+  deleteTaskElement
 };

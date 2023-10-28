@@ -57,11 +57,27 @@ function getTasksByProject(projectName) {
   if (projectsList != null) {
     projectsList.forEach((project) => {
       if (projectName == project.name) {
-        listOfTasks =  project.listOfTasks;
+        listOfTasks = project.listOfTasks;
       }
     });
     return listOfTasks;
   }
+}
+
+function deleteTask(projectName, taskName) {
+  var projectsList = JSON.parse(localStorage.getItem("projectsList"));
+  var tasksList = getTasksByProject(projectName);
+  tasksList.forEach((task) => {
+    if (taskName == task.title) {
+      var tasksList = getTasksByProject(projectName);
+      var splicedList = tasksList.splice(task, 1);
+      var project = getProjectByName(projectName);
+      //add task to list of tasks in project
+      projectsList[project.index].listOfTasks = splicedList;
+      //tasksList.push(project);
+      localStorage.setItem("projectsList", JSON.stringify(tasksList));
+    }
+  });
 }
 
 export {
@@ -69,5 +85,6 @@ export {
   addProjectToLocalStorage,
   createNewTask,
   getProjectByName,
-  getTasksByProject
+  getTasksByProject,
+  deleteTask
 };
