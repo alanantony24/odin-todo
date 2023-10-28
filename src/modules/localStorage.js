@@ -69,13 +69,13 @@ function deleteTask(projectName, taskName) {
   var tasksList = getTasksByProject(projectName);
   tasksList.forEach((task) => {
     if (taskName == task.title) {
-      var tasksList = getTasksByProject(projectName);
-      var splicedList = tasksList.splice(task, 1);
+      //var tasksList = getTasksByProject(projectName);
+      tasksList.splice(task, 1);
       var project = getProjectByName(projectName);
       //add task to list of tasks in project
-      projectsList[project.index].listOfTasks = splicedList;
+      projectsList[project.index].listOfTasks = tasksList;
       //tasksList.push(project);
-      localStorage.setItem("projectsList", JSON.stringify(tasksList));
+      localStorage.setItem("projectsList", JSON.stringify(projectsList));
     }
   });
 }

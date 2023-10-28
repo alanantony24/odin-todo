@@ -96,9 +96,11 @@ function createTask() {
   var description = document.getElementById("description");
   var date = document.getElementById("date");
   createTaskBtn.addEventListener("click", () => {
+    const createTaskForm = document.querySelector(".taskForm");
     const projectName = document.querySelector(".elementHeading").textContent;
     const newTask = new Task(title.value, description.value, date.value);
     createNewTask(projectName, newTask);
+    createTaskForm.classList.add("hidden");
   });
 }
 
@@ -141,7 +143,7 @@ function deleteTaskElement() {
       var taskName = taskElement.parentNode.previousSibling.lastChild.textContent;
       console.log(taskName)
       deleteTask(projectName, taskName);
-      console.log("deleted")
+      taskElement.parentNode.parentNode.remove();
     })
   })
 }
