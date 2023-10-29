@@ -73,13 +73,22 @@ function displayAllProjects() {
     projectsListFromLocalStorage.forEach((project) => {
       const projectObject = document.createElement("div");
       projectObject.classList.add("projectObject");
+      const rightDiv = document.createElement("div");
+      rightDiv.classList.add("rightDiv");
+      const leftDiv = document.createElement("div");
+      leftDiv.classList.add("leftDiv");
       const projectName = document.createElement("h4");
       projectName.textContent = project.name;
-      const kebabIcon = document.createElement("img");
-      kebabIcon.src = "../src/images/kebab.png";
-      kebabIcon.classList.add("deleteEditProject");
-      projectObject.appendChild(projectName);
-      projectObject.appendChild(kebabIcon);
+      const deleteIcon = document.createElement("img");
+      deleteIcon.src = "../src/images/delete.png";
+      deleteIcon.classList.add("deleteProject");
+      const editIcon = document.createElement("img");
+      editIcon.src = "../src/images/edit.png";
+      leftDiv.appendChild(projectName);
+      rightDiv.appendChild(editIcon);
+      rightDiv.appendChild(deleteIcon);
+      projectObject.appendChild(leftDiv);
+      projectObject.appendChild(rightDiv);
       projectsList.appendChild(projectObject);
     });
   }
@@ -127,17 +136,20 @@ function displayTasksByProject() {
     rightDiv.classList.add("taskElementRightDiv");
     const taskName = document.createElement("h3");
     const dueDate = document.createElement("h3");
-    const kebabIcon = document.createElement("img");
+    const editIcon = document.createElement("img");
+    const deleteIcon = document.createElement("img");
     const starIcon = document.createElement("img");
-    kebabIcon.classList.add("deleteEditTask");
-    kebabIcon.src = "../src/images/kebab.png"
+    deleteIcon.classList.add("deleteTask");
+    editIcon.src = "../src/images/edit.png"
+    deleteIcon.src = "../src/images/delete.png"
     starIcon.src = "../src/images/star.png"
     taskName.textContent = task.title;
     dueDate.textContent = task.dueDate;
     leftDiv.append(starIcon)
     leftDiv.append(taskName);
     rightDiv.append(dueDate);
-    rightDiv.append(kebabIcon);
+    rightDiv.append(editIcon);
+    rightDiv.append(deleteIcon)
     taskElement.append(leftDiv);
     taskElement.append(rightDiv);
     tasksDiv.appendChild(taskElement);
@@ -146,7 +158,7 @@ function displayTasksByProject() {
 }
 
 function deleteTaskElement() {
-  const taskElements = document.querySelectorAll(".deleteEditTask");
+  const taskElements = document.querySelectorAll(".deleteTask");
   console.log(taskElements)
   const projectName = document.querySelector(".elementHeading").textContent;
   taskElements.forEach((taskElement) => {
@@ -160,10 +172,10 @@ function deleteTaskElement() {
 }
 
 function deleteProjectElement() {
-  const projectElements = document.querySelectorAll(".deleteEditProject");
+  const projectElements = document.querySelectorAll(".deleteProject");
   projectElements.forEach((projectElement) => {
     projectElement.addEventListener("click", () => {
-      var projectName = projectElement.previousSibling.textContent;
+      var projectName = projectElement.parentNode.previousSibling.lastChild.textContent;
       console.log(projectName);
       deleteProject(projectName);
       projectElement.parentNode.parentNode.remove();
