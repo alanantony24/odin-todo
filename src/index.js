@@ -6,6 +6,7 @@ import {
   displayAllProjects,
   createTask,
   editProjectElement,
+  displayAllTasks
 } from "./modules/domManipulation";
 //to toggle the sidebar.
 const hamburgerBtn = document.querySelector(".hamburgerBtn");
@@ -42,3 +43,4 @@ addNewProject();
 createTask();
 //edit project
 editProjectElement();
+displayAllTasks();

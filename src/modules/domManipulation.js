@@ -5,6 +5,7 @@ import {
   addProjectToLocalStorage,
   getTasksByProject,
   createNewTask,
+  getAllTasks,
   deleteTask,
   deleteProject,
   editProject,
@@ -209,6 +210,32 @@ function editProjectElement() {
   }
 }
 
+function displayAllTasks() {
+  const tasksList = getAllTasks();
+  const tasksDiv = document.querySelector(".tasksList");
+  tasksDiv.replaceChildren();
+  tasksList.forEach((task) => {
+    const taskElement = document.createElement("div");
+    taskElement.classList.add("taskElement");
+    const leftDiv = document.createElement("div");
+    leftDiv.classList.add("taskElementLeftDiv");
+    const rightDiv = document.createElement("div");
+    rightDiv.classList.add("taskElementRightDiv");
+    const taskName = document.createElement("h3");
+    const dueDate = document.createElement("h3");
+    const starIcon = document.createElement("img");
+    starIcon.src = "../src/images/star.png";
+    taskName.textContent = task.title;
+    dueDate.textContent = task.dueDate;
+    leftDiv.append(starIcon);
+    leftDiv.append(taskName);
+    rightDiv.append(dueDate);
+    taskElement.append(leftDiv);
+    taskElement.append(rightDiv);
+    tasksDiv.appendChild(taskElement);
+  });
+}
+
 export {
   clickOnElementList,
   displayCreateProjectForm,
@@ -219,4 +246,5 @@ export {
   deleteTaskElement,
   deleteProjectElement,
   editProjectElement,
+  displayAllTasks
 };

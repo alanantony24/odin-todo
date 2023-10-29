@@ -64,6 +64,17 @@ function getTasksByProject(projectName) {
   }
 }
 
+function getAllTasks() {
+  var projectsList = JSON.parse(localStorage.getItem("projectsList"));
+  var listOfTasks = [];
+  if (projectsList != null) {
+    projectsList.forEach((project) => {
+      listOfTasks.push.apply(listOfTasks, project.listOfTasks);
+    })
+    return listOfTasks;
+  }
+}
+
 function deleteTask(projectName, taskName) {
   var projectsList = JSON.parse(localStorage.getItem("projectsList"));
   var tasksList = getTasksByProject(projectName);
@@ -109,6 +120,7 @@ export {
   createNewTask,
   getProjectByName,
   getTasksByProject,
+  getAllTasks,
   deleteTask,
   deleteProject,
   editProject
