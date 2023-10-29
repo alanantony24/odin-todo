@@ -214,25 +214,67 @@ function displayAllTasks() {
   const tasksList = getAllTasks();
   const tasksDiv = document.querySelector(".tasksList");
   tasksDiv.replaceChildren();
-  tasksList.forEach((task) => {
-    const taskElement = document.createElement("div");
-    taskElement.classList.add("taskElement");
-    const leftDiv = document.createElement("div");
-    leftDiv.classList.add("taskElementLeftDiv");
-    const rightDiv = document.createElement("div");
-    rightDiv.classList.add("taskElementRightDiv");
-    const taskName = document.createElement("h3");
-    const dueDate = document.createElement("h3");
-    const starIcon = document.createElement("img");
-    starIcon.src = "../src/images/star.png";
-    taskName.textContent = task.title;
-    dueDate.textContent = task.dueDate;
-    leftDiv.append(starIcon);
-    leftDiv.append(taskName);
-    rightDiv.append(dueDate);
-    taskElement.append(leftDiv);
-    taskElement.append(rightDiv);
-    tasksDiv.appendChild(taskElement);
+  const allTasks = document.querySelector(".allTasks");
+  allTasks.addEventListener("click", () => {
+    tasksList.forEach((task) => {
+      const taskElement = document.createElement("div");
+      taskElement.classList.add("taskElement");
+      const leftDiv = document.createElement("div");
+      leftDiv.classList.add("taskElementLeftDiv");
+      const rightDiv = document.createElement("div");
+      rightDiv.classList.add("taskElementRightDiv");
+      const taskName = document.createElement("h3");
+      const dueDate = document.createElement("h3");
+      const starIcon = document.createElement("img");
+      starIcon.src = "../src/images/star.png";
+      taskName.textContent = task.title;
+      dueDate.textContent = task.dueDate;
+      leftDiv.append(starIcon);
+      leftDiv.append(taskName);
+      rightDiv.append(dueDate);
+      taskElement.append(leftDiv);
+      taskElement.append(rightDiv);
+      tasksDiv.appendChild(taskElement);
+    });
+  });
+}
+
+function displayTasksForToday() {
+  const listOfAllTasks = getAllTasks();
+  const listOfTodaysTasks = [];
+  listOfAllTasks.forEach((task) => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const day = today.getDate();
+    if (year.toString() + '-' + month.toString() + '-' + day.toString() === task.dueDate.toString()) {
+      listOfTodaysTasks.push(task);
+    }
+  });
+  const tasksDiv = document.querySelector(".tasksList");
+  tasksDiv.replaceChildren();
+  const todaysTasks = document.querySelector(".todaysTasks");
+  todaysTasks.addEventListener("click", () => {
+    listOfTodaysTasks.forEach((task) => {
+      const taskElement = document.createElement("div");
+      taskElement.classList.add("taskElement");
+      const leftDiv = document.createElement("div");
+      leftDiv.classList.add("taskElementLeftDiv");
+      const rightDiv = document.createElement("div");
+      rightDiv.classList.add("taskElementRightDiv");
+      const taskName = document.createElement("h3");
+      const dueDate = document.createElement("h3");
+      const starIcon = document.createElement("img");
+      starIcon.src = "../src/images/star.png";
+      taskName.textContent = task.title;
+      dueDate.textContent = task.dueDate;
+      leftDiv.append(starIcon);
+      leftDiv.append(taskName);
+      rightDiv.append(dueDate);
+      taskElement.append(leftDiv);
+      taskElement.append(rightDiv);
+      tasksDiv.appendChild(taskElement);
+    });
   });
 }
 
@@ -246,5 +288,6 @@ export {
   deleteTaskElement,
   deleteProjectElement,
   editProjectElement,
-  displayAllTasks
+  displayAllTasks,
+  displayTasksForToday,
 };
