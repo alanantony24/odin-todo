@@ -19,7 +19,7 @@ function clickOnElementList(elementList) {
       }
       if (elementList === ".mainTaskListObject") {
         elementHeading.textContent = element.children[1].textContent;
-      } else {
+      } else if (elementList === ".projectObject") {
         elementHeading.textContent = element.children[0].textContent;
         if (document.querySelector(".noTasksText")) {
           document.querySelector(".noTasksText").remove();
@@ -56,6 +56,7 @@ function addNewProject() {
       const newProject = new Project(projectName.value);
       addProjectToLocalStorage(newProject);
       displayAllProjects();
+      clickOnElementList(".projectObject")
       projectForm.classList.add("hidden");
     });
   }
@@ -66,17 +67,19 @@ function displayAllProjects() {
   const projectsListFromLocalStorage = getProjectListFromLocalStorage();
   const projectsList = document.querySelector(".projectsList");
   projectsList.replaceChildren();
-  projectsListFromLocalStorage.forEach((project) => {
-    const projectObject = document.createElement("div");
-    projectObject.classList.add("projectObject");
-    const projectName = document.createElement("h4");
-    projectName.textContent = project.name;
-    const kebabIcon = document.createElement("img");
-    kebabIcon.src = "../src/images/kebab.png";
-    projectObject.appendChild(projectName);
-    projectObject.appendChild(kebabIcon);
-    projectsList.appendChild(projectObject);
-  });
+  if (projectsListFromLocalStorage != null) {
+    projectsListFromLocalStorage.forEach((project) => {
+      const projectObject = document.createElement("div");
+      projectObject.classList.add("projectObject");
+      const projectName = document.createElement("h4");
+      projectName.textContent = project.name;
+      const kebabIcon = document.createElement("img");
+      kebabIcon.src = "../src/images/kebab.png";
+      projectObject.appendChild(projectName);
+      projectObject.appendChild(kebabIcon);
+      projectsList.appendChild(projectObject);
+    });
+  }
 }
 
 //create a button to unhide the create task form
