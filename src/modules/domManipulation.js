@@ -5,7 +5,8 @@ import {
   addProjectToLocalStorage,
   getTasksByProject,
   createNewTask,
-  deleteTask
+  deleteTask,
+  deleteProject
 } from "./localStorage";
 //selects the taskLists from the sideBar, highlights them and changes the name of the heading in the right pane
 function clickOnElementList(elementList) {
@@ -24,6 +25,7 @@ function clickOnElementList(elementList) {
         if (document.querySelector(".noTasksText")) {
           document.querySelector(".noTasksText").remove();
           displayTasksByProject();
+          deleteProjectElement();
           deleteTaskElement();
           unhideCreateTaskForm();
         }
@@ -75,6 +77,7 @@ function displayAllProjects() {
       projectName.textContent = project.name;
       const kebabIcon = document.createElement("img");
       kebabIcon.src = "../src/images/kebab.png";
+      kebabIcon.classList.add("deleteEditProject");
       projectObject.appendChild(projectName);
       projectObject.appendChild(kebabIcon);
       projectsList.appendChild(projectObject);
@@ -155,6 +158,18 @@ function deleteTaskElement() {
   })
 }
 
+function deleteProjectElement() {
+  const projectElements = document.querySelectorAll(".deleteEditProject");
+  projectElements.forEach((projectElement) => {
+    projectElement.addEventListener("click", () => {
+      var projectName = projectElement.previousSibling.textContent;
+      console.log(projectName);
+      deleteProject(projectName);
+      projectElement.parentNode.parentNode.remove();
+    })
+  })
+}
+
 export {
   clickOnElementList,
   displayCreateProjectForm,
@@ -162,5 +177,6 @@ export {
   addNewProject,
   displayAllProjects,
   createTask,
-  deleteTaskElement
+  deleteTaskElement,
+  deleteProjectElement
 };

@@ -80,11 +80,22 @@ function deleteTask(projectName, taskName) {
   });
 }
 
+function deleteProject(projectName) {
+  var projectsList = JSON.parse(localStorage.getItem("projectsList"));
+  projectsList.forEach((project) => {
+    if (projectName == project.name) {
+      projectsList.splice(project, 1);
+      localStorage.setItem("projectsList", JSON.stringify(projectsList));
+    }
+  })
+}
+
 export {
   getProjectListFromLocalStorage,
   addProjectToLocalStorage,
   createNewTask,
   getProjectByName,
   getTasksByProject,
-  deleteTask
+  deleteTask,
+  deleteProject
 };
