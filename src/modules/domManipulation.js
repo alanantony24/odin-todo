@@ -142,6 +142,7 @@ function displayTasksByProject() {
     taskElement.append(rightDiv);
     tasksDiv.appendChild(taskElement);
   });
+  deleteTaskElement();
 }
 
 function deleteTaskElement() {
