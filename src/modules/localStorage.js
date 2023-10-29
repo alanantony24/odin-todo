@@ -87,7 +87,20 @@ function deleteProject(projectName) {
       projectsList.splice(project, 1);
       localStorage.setItem("projectsList", JSON.stringify(projectsList));
     }
-  })
+  });
+}
+
+function editProject(projectName, editedData) {
+  var projectsList = JSON.parse(localStorage.getItem("projectsList"));
+  projectsList.forEach((project) => {
+    if (projectName == project.name) {
+      var project = getProjectByName(projectName);
+      projectsList.splice(project.index, 1);
+      //add task to list of tasks in project
+      projectsList[project.index].name = editedData;
+      localStorage.setItem("projectsList", JSON.stringify(projectsList));
+    }
+  });
 }
 
 export {
@@ -97,5 +110,6 @@ export {
   getProjectByName,
   getTasksByProject,
   deleteTask,
-  deleteProject
+  deleteProject,
+  editProject
 };

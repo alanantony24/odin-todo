@@ -6,7 +6,8 @@ import {
   getTasksByProject,
   createNewTask,
   deleteTask,
-  deleteProject
+  deleteProject,
+  editProject,
 } from "./localStorage";
 //selects the taskLists from the sideBar, highlights them and changes the name of the heading in the right pane
 function clickOnElementList(elementList) {
@@ -58,7 +59,7 @@ function addNewProject() {
       const newProject = new Project(projectName.value);
       addProjectToLocalStorage(newProject);
       displayAllProjects();
-      clickOnElementList(".projectObject")
+      clickOnElementList(".projectObject");
       projectForm.classList.add("hidden");
     });
   }
@@ -84,6 +85,7 @@ function displayAllProjects() {
       deleteIcon.classList.add("deleteProject");
       const editIcon = document.createElement("img");
       editIcon.src = "../src/images/edit.png";
+      editIcon.classList.add("editProjectBtn");
       leftDiv.appendChild(projectName);
       rightDiv.appendChild(editIcon);
       rightDiv.appendChild(deleteIcon);
@@ -140,16 +142,16 @@ function displayTasksByProject() {
     const deleteIcon = document.createElement("img");
     const starIcon = document.createElement("img");
     deleteIcon.classList.add("deleteTask");
-    editIcon.src = "../src/images/edit.png"
-    deleteIcon.src = "../src/images/delete.png"
-    starIcon.src = "../src/images/star.png"
+    editIcon.src = "../src/images/edit.png";
+    deleteIcon.src = "../src/images/delete.png";
+    starIcon.src = "../src/images/star.png";
     taskName.textContent = task.title;
     dueDate.textContent = task.dueDate;
-    leftDiv.append(starIcon)
+    leftDiv.append(starIcon);
     leftDiv.append(taskName);
     rightDiv.append(dueDate);
     rightDiv.append(editIcon);
-    rightDiv.append(deleteIcon)
+    rightDiv.append(deleteIcon);
     taskElement.append(leftDiv);
     taskElement.append(rightDiv);
     tasksDiv.appendChild(taskElement);
@@ -159,28 +161,52 @@ function displayTasksByProject() {
 
 function deleteTaskElement() {
   const taskElements = document.querySelectorAll(".deleteTask");
-  console.log(taskElements)
+  console.log(taskElements);
   const projectName = document.querySelector(".elementHeading").textContent;
   taskElements.forEach((taskElement) => {
     taskElement.addEventListener("click", () => {
-      var taskName = taskElement.parentNode.previousSibling.lastChild.textContent;
-      console.log(taskName)
+      var taskName =
+        taskElement.parentNode.previousSibling.lastChild.textContent;
+      console.log(taskName);
       deleteTask(projectName, taskName);
       taskElement.parentNode.parentNode.remove();
-    })
-  })
+    });
+  });
 }
 
 function deleteProjectElement() {
   const projectElements = document.querySelectorAll(".deleteProject");
   projectElements.forEach((projectElement) => {
     projectElement.addEventListener("click", () => {
-      var projectName = projectElement.parentNode.previousSibling.lastChild.textContent;
+      var projectName =
+        projectElement.parentNode.previousSibling.lastChild.textContent;
       console.log(projectName);
       deleteProject(projectName);
       projectElement.parentNode.parentNode.remove();
-    })
-  })
+    });
+  });
+}
+
+function editProjectElement() {
+  const editProjectForm = document.querySelector(".projectForm");
+  const editProjectBtns = document.querySelectorAll(".editProjectBtn");
+  if (editProjectBtns != null) {
+    editProjectBtns.forEach((editProjectBtn) => {
+      editProjectBtn.addEventListener("click", () => {
+        editProjectForm.classList.remove("hidden");
+        const prevProjectName =
+          editProjectBtn.parentElement.previousSibling.textContent;
+        document.getElementById("projectName").value = prevProjectName;
+        document
+          .getElementById("addProjectBtn")
+          .addEventListener("click", () => {
+            var editedName = document.getElementById("projectName");
+            editProject(prevProjectName, editedName.value);
+            displayAllProjects();
+          });
+      });
+    });
+  }
 }
 
 export {
@@ -191,5 +217,6 @@ export {
   displayAllProjects,
   createTask,
   deleteTaskElement,
-  deleteProjectElement
+  deleteProjectElement,
+  editProjectElement,
 };
